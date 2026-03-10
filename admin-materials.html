@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Manage Materials</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<h2>Manage Study Materials</h2>
+
+<ul id="materialList" class="list-group mt-4"></ul>
+
+</div>
+
+<script>
+
+let materials = JSON.parse(localStorage.getItem("materials")) || [];
+
+let list = document.getElementById("materialList");
+
+materials.forEach(function(m, index){
+
+let li = document.createElement("li");
+li.className = "list-group-item";
+
+li.innerHTML = m.title + 
+'<button class="btn btn-danger float-end" onclick="deleteMaterial('+index+')">Delete</button>';
+
+list.appendChild(li);
+
+});
+
+function deleteMaterial(index){
+
+let materials = JSON.parse(localStorage.getItem("materials")) || [];
+
+materials.splice(index,1);
+
+localStorage.setItem("materials", JSON.stringify(materials));
+
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
